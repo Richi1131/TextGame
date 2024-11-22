@@ -1,3 +1,5 @@
+package textGame;
+
 public class Command {
     public static int totalCommands;
     public String name;

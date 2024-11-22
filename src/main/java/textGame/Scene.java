@@ -1,3 +1,5 @@
+package textGame;
+
 public class Scene {
     /// scenes connected in space 0 -> front, 1 -> right, 2 -> back, 3 -> left
     public Scene[] linkedScenes = new Scene[4];

@@ -1,3 +1,5 @@
+package textGame;
+
 public class Player {
     public int health = 100;
     public int level = 1;
