@@ -10,19 +10,7 @@ public class Player extends Character{
     }
     /// move to connected scene 0 -> front, 1 -> right, 2 -> back, 3 -> left
     public void move(int direction) {
-        Position targetPosition = new Position(this.scene.getPosition());
-        if (direction == 0) {
-            targetPosition.y++;
-        }
-        else if (direction == 1) {
-            targetPosition.x++;
-        }
-        else if (direction == 2) {
-            targetPosition.y--;
-        }
-        else if (direction == 3) {
-            targetPosition.x--;
-        }
+        Position targetPosition = Calculator.calculateNewPosition(this.scene.getPosition(), direction);
         Scene targetScene = Scene.getByPosition(targetPosition);
         if (targetScene != null) {
             scene = targetScene;

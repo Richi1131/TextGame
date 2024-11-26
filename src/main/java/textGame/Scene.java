@@ -38,19 +38,7 @@ public class Scene {
     /// Constructor for entering a scene from another scene
     Scene(Scene originScene, int direction) {
         this();
-        position = new Position(originScene.position);
-        if (direction == 0) {
-            position.y++;
-        }
-        else if (direction == 1) {
-            position.x++;
-        }
-        else if (direction == 2) {
-            position.y--;
-        }
-        else if (direction == 3) {
-            position.x--;
-        }
+        position = Calculator.calculateNewPosition(originScene.position, direction);
         Scene.sceneHashtable.put(position, this);
     }
     public String toString() {
