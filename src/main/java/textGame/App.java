@@ -18,7 +18,7 @@ public class App {
 //
 //                printPossibleActions(scene);
 //            }
-
+            System.out.println("You are in " + player.scene.name);
             String input = scanner.nextLine();
             input = input.toLowerCase();
             if (input.equals("help")) {

@@ -1,10 +1,9 @@
 package textGame;
 
-public class Player {
+public class Player extends Character{
     public int health = 100;
     public int level = 1;
     public int xp = 0;
-    public Scene scene;
 
     public Player(Scene scene) {
         this.scene = scene;
@@ -15,7 +14,8 @@ public class Player {
             scene = scene.linkedScenes[direction];
         }
         else {
-            System.out.println("Cant leave there");
+            scene.linkedScenes[direction] = new Scene(scene);
+            scene = scene.linkedScenes[direction];
         }
     }
 }
