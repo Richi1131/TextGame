@@ -7,6 +7,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
 
         Scene scene = new Scene();
+        Scene.sceneHashtable.put(new Position(0, 0), scene);
         Player player = new Player(scene);
 
         //List<Command> commands = new ArrayList<Command>();
