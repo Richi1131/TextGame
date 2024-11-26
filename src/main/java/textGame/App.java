@@ -6,8 +6,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
 
-        Scene scene = new Scene();
-        Scene.sceneHashtable.put(new Position(0, 0), scene);
+        Scene scene = new Scene(new Position(0, 0));
         Player player = new Player(scene);
 
         //List<Command> commands = new ArrayList<Command>();
@@ -19,7 +18,7 @@ public class App {
 //
 //                printPossibleActions(scene);
 //            }
-            System.out.println("You are in " + player.scene.name);
+            System.out.println("You are in " + player.scene);
             String input = scanner.nextLine();
             input = input.toLowerCase();
             if (input.equals("help")) {
@@ -41,10 +40,10 @@ public class App {
             }
         }
     }
-    public static void printPossibleActions(Scene scene) {
-        System.out.println("You can:");
-        for (int i = 0; i < scene.possibleActions.length; i++) {
-            System.out.println(i+1+". " + scene.possibleActions[i]);
-        }
-    }
+//    public static void printPossibleActions(Scene scene) {
+//        System.out.println("You can:");
+//        for (int i = 0; i < scene.possibleActions.length; i++) {
+//            System.out.println(i+1+". " + scene.possibleActions[i]);
+//        }
+//    }
 }
