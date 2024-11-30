@@ -10,6 +10,10 @@ public class Player extends Character{
     }
     /// move to connected scene 0 -> front, 1 -> right, 2 -> back, 3 -> left
     public void move(int direction) {
+        if (!scene.isExitOpen(direction)) {
+            System.out.println("Can't exit in this direction.");
+            return;
+        }
         Position targetPosition = Utility.calculateNewPosition(this.scene.getPosition(), direction);
         Scene targetScene = Scene.getByPosition(targetPosition);
         if (targetScene != null) {

@@ -9,15 +9,7 @@ public class App {
         Scene scene = new Scene(new Position(0, 0));
         Player player = new Player(scene);
 
-        //List<Command> commands = new ArrayList<Command>();
-        //commands.add(new Command());
         while (true) {
-//            if (player.location.equals("road")) {
-//                System.out.println("You are on a road in the middle of nowhere.");
-//                System.out.println();
-//
-//                printPossibleActions(scene);
-//            }
             System.out.println("Location: " + player.scene + " at " + player.scene.getPosition());
             String input = scanner.nextLine();
             input = input.toLowerCase();
@@ -35,15 +27,11 @@ public class App {
                 catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(e);
                 }
-            } else {
+            } else if (input.startsWith("look")) {
+                System.out.println("You see " + player.scene.getDescription() + ".");
+            }else {
                 System.out.println("unknown input \"" + input + "\", use \"help\" for a list of commands");
             }
         }
     }
-//    public static void printPossibleActions(Scene scene) {
-//        System.out.println("You can:");
-//        for (int i = 0; i < scene.possibleActions.length; i++) {
-//            System.out.println(i+1+". " + scene.possibleActions[i]);
-//        }
-//    }
 }

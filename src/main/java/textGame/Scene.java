@@ -25,8 +25,14 @@ public class Scene {
         return getByPosition(new Position(x, y));
     }
 
+    public String getDescription() {
+        return this.description;
+    }
     public Position getPosition() {
         return this.position;
+    }
+    public boolean isExitOpen(int direction) {
+        return openExits[direction];
     }
     private Scene() {
         generateFromRandomLocation();
