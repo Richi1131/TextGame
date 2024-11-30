@@ -1,11 +1,15 @@
 package textGame;
 
 import java.util.Hashtable;
+import java.util.Random;
 
 public class Scene {
     private static int counter = 0;
     private static Hashtable<Position, Scene> sceneHashtable = new Hashtable<Position, Scene>();
     private String name;
+    private String description;
+    private int danger;
+    private int value;
     private Position position;
     /// scenes connected to current scene in space 0 -> front, 1 -> right, 2 -> back, 3 -> left
     private Boolean[] openExits = {true, true, true, true};
@@ -20,14 +24,12 @@ public class Scene {
     public static Scene getByPosition(int x, int y) {
         return getByPosition(new Position(x, y));
     }
+
     public Position getPosition() {
         return this.position;
     }
-    Scene() {
-        generateEncounter();
-        generatePossibleActions();
-        this.name = String.valueOf(counter);
-        position = new Position(0, 0);
+    private Scene() {
+        generateFromRandomLocation();
         counter++;
     }
     Scene(Position position) {
@@ -38,11 +40,26 @@ public class Scene {
     /// Constructor for entering a scene from another scene
     Scene(Scene originScene, int direction) {
         this();
-        position = Calculator.calculateNewPosition(originScene.position, direction);
+        position = Utility.calculateNewPosition(originScene.position, direction);
         Scene.sceneHashtable.put(position, this);
     }
     public String toString() {
         return this.name;
+    }
+    public void generateFromLocationsCSV(int lineNumber) {
+        String locationLine = Utility.readCsvLine("src/main/resources/locations.csv", lineNumber);
+        String[] locationInformation = locationLine.split(",");
+
+        this.name = locationInformation[0];
+        this.description = locationInformation[1];
+        this.danger = Integer.parseInt(locationInformation[2]);
+        this.value = Integer.parseInt(locationInformation[3]);
+    }
+    public void generateFromRandomLocation() {
+        Random rand = new Random();
+        int lowerBound = 1;
+        int upperBound = Utility.readFileLength("src/main/resources/locations.csv");
+        generateFromLocationsCSV(rand.nextInt(lowerBound, upperBound));
     }
     public void generateEncounter() {
         encounter = new Encounter();

@@ -18,7 +18,7 @@ public class App {
 //
 //                printPossibleActions(scene);
 //            }
-            System.out.println("You are in " + player.scene);
+            System.out.println("Location: " + player.scene + " at " + player.scene.getPosition());
             String input = scanner.nextLine();
             input = input.toLowerCase();
             if (input.equals("help")) {
