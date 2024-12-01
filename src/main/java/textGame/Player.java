@@ -1,7 +1,6 @@
 package textGame;
 
-public class Player extends Character{
-    public int health = 100;
+public class Player extends Character {
     public int level = 1;
     public int xp = 0;
 
