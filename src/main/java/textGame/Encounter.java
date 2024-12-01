@@ -1,16 +1,23 @@
 package textGame;
 
 public class Encounter {
-    public Npc npc;
+    private Npc npc;
+    private Scene scene;
 
+    public Npc getNpc() {
+        return npc;
+    }
+    public Scene getScene() {
+        return scene;
+    }
     public void removeNpc() {
         npc = null;
     }
-
-    public void generateRandomEncounter() {
+    public void generateRandomEncounter(Scene scene) {
         this.npc = new Npc(this);
     }
-    public Encounter() {
-        generateRandomEncounter();
+    public Encounter(Scene scene) {
+        this.scene = scene;
+        generateRandomEncounter(scene);
     }
 }

@@ -9,6 +9,7 @@ public class Npc extends Character implements Attack, Die {
     private int damage;
 
     public Npc(Encounter encounter) {
+        super(encounter.getScene());
         this.encounter = encounter;
         generateRandomNpc();
     }
@@ -41,5 +42,8 @@ public class Npc extends Character implements Attack, Die {
     @Override
     public String toString() {
         return name;
+    }
+    public void takeTurn() {
+        attack(scene.getPlayer());
     }
 }

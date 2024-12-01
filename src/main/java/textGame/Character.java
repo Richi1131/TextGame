@@ -7,7 +7,8 @@ public abstract class Character implements Attackable, Die {
     public Scene scene;
     protected HumanoidBody body;
 
-    public Character() {
+    public Character(Scene scene) {
+        this.scene = scene;
         body = new HumanoidBody(this);
     }
     @Override

@@ -3,15 +3,24 @@ package textGame;
 import java.util.Scanner;
 
 public class App {
+    public static Scene scene = new Scene(new Position(0, 0));
+    public static Player player = new Player(scene);
+
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
-
-        Scene scene = new Scene(new Position(0, 0));
-        Player player = new Player(scene);
-
+        scene.setPlayer(player);
         while (true) {
-            System.out.println("Location: " + player.scene + " at " + player.scene.getPosition());
-            System.out.println("Encounter: " + player.scene.getNpc());
+            printSituation();
+            playerTurn();
+            npcTurn();
+        }
+    }
+    public static void printSituation() {
+        System.out.println("Location: " + player.scene + " at " + player.scene.getPosition());
+        System.out.println("Encounter: " + player.scene.getNpc());
+    }
+    public static void playerTurn() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
             String input = scanner.nextLine();
             input = input.toLowerCase();
             if (input.equals("help")) {
@@ -21,7 +30,7 @@ public class App {
                 System.out.format("+---------+-----------+%n");
 
                 System.out.format("+---------+-----------+%n");
-            } else if (input.equals("move ")) {
+            } else if (input.startsWith("move ")) {
                 if (input.matches("move [0-3]")) {
                     player.move(input.charAt(5) - '0');
                 }
@@ -33,15 +42,25 @@ public class App {
                     if (target.equals("self")) {
                         System.out.println("You try to hit yourself.");
                         player.attack(player);
+                        return;
                     }
                     else if (target.equals(player.scene.getNpc().toString())) {
                         System.out.println("You try to hit " + player.scene.getNpc() + ".");
                         player.attack(player.scene.getNpc());
+                        return;
                     }
                 }
-            }else {
+            } else if (input.startsWith("wait")) {
+                return;
+            } else {
                 System.out.println("unknown input \"" + input + "\", use \"help\" for a list of commands");
             }
+        }
+    }
+    public static void npcTurn() {
+        Npc npc = scene.getNpc();
+        if (npc != null) {
+            npc.takeTurn();
         }
     }
     public static void endGame() {

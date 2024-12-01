@@ -6,11 +6,13 @@ import java.util.Random;
 public class Scene {
     private static int counter = 0;
     private static Hashtable<Position, Scene> sceneHashtable = new Hashtable<Position, Scene>();
+    private Player player;
     private String name;
     private String description;
     private int danger;
     private int value;
     private Position position;
+
     /// scenes connected to current scene in space 0 -> front, 1 -> right, 2 -> back, 3 -> left
     private Boolean[] openExits = {true, true, true, true};
     private Encounter encounter;
@@ -31,8 +33,14 @@ public class Scene {
     public Position getPosition() {
         return this.position;
     }
+    public Player getPlayer() {
+        return player;
+    }
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
     public Npc getNpc() {
-        return encounter.npc;
+        return encounter.getNpc();
     }
     public boolean isExitOpen(int direction) {
         return openExits[direction];
@@ -72,7 +80,7 @@ public class Scene {
         generateFromLocationsCSV(rand.nextInt(lowerBound, upperBound));
     }
     public void generateRandomEncounter() {
-        encounter = new Encounter();
+        encounter = new Encounter(this);
     }
     private void generatePossibleActions() {
         possibleActions = new Action[2];
