@@ -11,6 +11,7 @@ public class App {
 
         while (true) {
             System.out.println("Location: " + player.scene + " at " + player.scene.getPosition());
+            System.out.println("Encounter: " + player.scene.getNpc());
             String input = scanner.nextLine();
             input = input.toLowerCase();
             if (input.equals("help")) {
@@ -20,18 +21,24 @@ public class App {
                 System.out.format("+---------+-----------+%n");
 
                 System.out.format("+---------+-----------+%n");
-            } else if (input.startsWith("move ")) {
-                try {
+            } else if (input.equals("move ")) {
+                if (input.matches("move [0-3]")) {
                     player.move(input.charAt(5) - '0');
-                }
-                catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(e);
                 }
             } else if (input.startsWith("look")) {
                 System.out.println("You see " + player.scene.getDescription() + ".");
-            } else if (input.startsWith("attack self")) {
-                System.out.println("You try to hit yourself.");
-                player.attack(player);
+            } else if (input.startsWith("attack ")) {
+                if (input.matches("attack [a-z]*")) {
+                    String target = input.split(" ")[1];
+                    if (target.equals("self")) {
+                        System.out.println("You try to hit yourself.");
+                        player.attack(player);
+                    }
+                    else if (target.equals(player.scene.getNpc().toString())) {
+                        System.out.println("You try to hit " + player.scene.getNpc() + ".");
+                        player.attack(player.scene.getNpc());
+                    }
+                }
             }else {
                 System.out.println("unknown input \"" + input + "\", use \"help\" for a list of commands");
             }

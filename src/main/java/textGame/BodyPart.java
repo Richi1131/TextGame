@@ -25,6 +25,7 @@ public abstract class BodyPart implements Die, Attackable {
     @Override
     public boolean getAttacked(int damage) {
         this.damage(damage);
+        System.out.println(this.body.getCharacter() + "'s " + this + " was hit for " + damage + " damage.");
         return true;
     }
 }

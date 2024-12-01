@@ -31,11 +31,15 @@ public class Scene {
     public Position getPosition() {
         return this.position;
     }
+    public Npc getNpc() {
+        return encounter.npc;
+    }
     public boolean isExitOpen(int direction) {
         return openExits[direction];
     }
     private Scene() {
         generateFromRandomLocation();
+        generateRandomEncounter();
         counter++;
     }
     Scene(Position position) {
@@ -67,7 +71,7 @@ public class Scene {
         int upperBound = Utility.readFileLength("src/main/resources/locations.csv");
         generateFromLocationsCSV(rand.nextInt(lowerBound, upperBound));
     }
-    public void generateEncounter() {
+    public void generateRandomEncounter() {
         encounter = new Encounter();
     }
     private void generatePossibleActions() {

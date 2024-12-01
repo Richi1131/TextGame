@@ -2,7 +2,7 @@ package textGame;
 
 import java.util.Random;
 
-public abstract class Character implements Die, Attackable {
+public abstract class Character implements Attackable, Die {
     public String name;
     public Scene scene;
     protected HumanoidBody body;
