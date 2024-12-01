@@ -1,7 +1,7 @@
 package textGame;
 
 public class Arm extends Limb {
-    public Arm(Body body) {
-        super(body);
+    public Arm(Body body, String name) {
+        super(body, name);
     }
 }

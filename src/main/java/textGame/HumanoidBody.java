@@ -11,10 +11,10 @@ public class HumanoidBody extends Body {
         this.head = new Head(this);
         this.torso = new Torso(this);
 
-        this.rightArm = new Arm(this);
-        this.leftArm = new Arm(this);
-        this.rightLeg = new Leg(this);
-        this.leftLeg = new Leg(this);
+        this.rightArm = new Arm(this, "right arm");
+        this.leftArm = new Arm(this, "left arm");
+        this.rightLeg = new Leg(this, "right leg");
+        this.leftLeg = new Leg(this, "left leg");
         limbs = new Limb[]{rightArm, leftArm, rightLeg, leftLeg};
     }
 }

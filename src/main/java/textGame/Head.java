@@ -2,7 +2,7 @@ package textGame;
 
 public class Head extends BodyPart {
     public Head(Body body) {
-        super(body);
+        super(body, "head");
     }
 
     @Override
