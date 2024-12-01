@@ -1,8 +1,7 @@
 package textGame;
 
-public class Player extends Character {
-    public int level = 1;
-    public int xp = 0;
+public class Player extends Character implements Attack {
+    private int damage = 100;
 
     public Player(Scene scene) {
         this.scene = scene;
@@ -21,6 +20,16 @@ public class Player extends Character {
         else {
             scene = new Scene(scene, direction);
         }
+    }
+    @Override
+    public void onDeath() {
+        App.endGame();
+    }
+
+
+    @Override
+    public int getDamage() {
+        return damage;
     }
 }
 

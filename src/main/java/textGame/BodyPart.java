@@ -1,9 +1,16 @@
 package textGame;
 
-public class BodyPart implements Attackable {
+public abstract class BodyPart implements Die, Attackable {
     private int health = 100;
+    private Body body;
     public int getHealth() {
         return health;
+    }
+    public Body getBody() {
+        return body;
+    }
+    public BodyPart(Body body) {
+        this.body = body;
     }
     public void damage(int damage) {
         if (health > damage) {
@@ -13,9 +20,6 @@ public class BodyPart implements Attackable {
             health = 0;
             onDeath();
         }
-    }
-    public void onDeath() {
-        return;
     }
 
     @Override

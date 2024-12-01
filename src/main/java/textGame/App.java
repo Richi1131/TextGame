@@ -29,9 +29,16 @@ public class App {
                 }
             } else if (input.startsWith("look")) {
                 System.out.println("You see " + player.scene.getDescription() + ".");
+            } else if (input.startsWith("attack self")) {
+                System.out.println("You try to hit yourself.");
+                player.attack(player);
             }else {
                 System.out.println("unknown input \"" + input + "\", use \"help\" for a list of commands");
             }
         }
+    }
+    public static void endGame() {
+        System.out.println("You are dead, the game is over.");
+        System.exit(0);
     }
 }

@@ -6,14 +6,15 @@ public class HumanoidBody extends Body {
     protected Leg rightLeg;
     protected Leg leftLeg;
 
-    public HumanoidBody() {
-        this.head = new Head();
-        this.torso = new Torso();
+    public HumanoidBody(Character character) {
+        super(character);
+        this.head = new Head(this);
+        this.torso = new Torso(this);
 
-        this.rightArm = new Arm();
-        this.leftArm = new Arm();
-        this.rightLeg = new Leg();
-        this.leftLeg = new Leg();
+        this.rightArm = new Arm(this);
+        this.leftArm = new Arm(this);
+        this.rightLeg = new Leg(this);
+        this.leftLeg = new Leg(this);
         limbs = new Limb[]{rightArm, leftArm, rightLeg, leftLeg};
     }
 }
