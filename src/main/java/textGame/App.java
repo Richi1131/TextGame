@@ -58,7 +58,7 @@ public class App {
         }
     }
     public static void npcTurn() {
-        Npc npc = scene.getNpc();
+        Npc npc = player.scene.getNpc();
         if (npc != null) {
             npc.takeTurn();
         }

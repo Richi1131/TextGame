@@ -3,10 +3,16 @@ package textGame;
 import java.util.Random;
 
 public abstract class Character implements Attackable, Die {
-    public String name;
+    private String name;
     public Scene scene;
     protected HumanoidBody body;
 
+    public String getName() {
+        return this.name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
     public Character(Scene scene) {
         this.scene = scene;
         body = new HumanoidBody(this);
@@ -22,5 +28,9 @@ public abstract class Character implements Attackable, Die {
         else {
             return false;
         }
+    }
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
