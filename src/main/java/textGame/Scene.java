@@ -1,6 +1,7 @@
 package textGame;
 
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Random;
 
 public class Scene {
@@ -12,10 +13,10 @@ public class Scene {
     private int danger;
     private int value;
     private Position position;
+    private Npc[] npcs = new Npc[0];
 
     /// scenes connected to current scene in space 0 -> front, 1 -> right, 2 -> back, 3 -> left
     private Boolean[] openExits = {true, true, true, true};
-    private Encounter encounter;
     private Action[] possibleActions;
     private static Action actionMoveForwards = new Action("Move down the road.");
     private static Action actionMoveBack = new Action("Go back.");
@@ -39,15 +40,26 @@ public class Scene {
     public void setPlayer(Player player) {
         this.player = player;
     }
-    public Npc getNpc() {
-        return encounter.getNpc();
+    public void addRandomNpc() {
+        addNpc(new Npc(this));
+    }
+    public void addNpc(Npc npc) {
+        Npc[] newNpcs = new Npc[npcs.length + 1];
+        for (int i = 0; i < npcs.length; i++) {
+            newNpcs[i] = npcs[i];
+        }
+        newNpcs[newNpcs.length-1] = npc;
+        npcs = newNpcs;
+    }
+    public Npc[] getNpcs() {
+        return npcs;
     }
     public boolean isExitOpen(int direction) {
         return openExits[direction];
     }
     private Scene() {
         generateFromRandomLocation();
-        generateRandomEncounter();
+        addRandomNpc();
         counter++;
     }
     Scene(Position position) {
@@ -79,13 +91,45 @@ public class Scene {
         int upperBound = Utility.readFileLength("src/main/resources/locations.csv");
         generateFromLocationsCSV(rand.nextInt(lowerBound, upperBound));
     }
-    public void generateRandomEncounter() {
-        encounter = new Encounter(this);
-    }
+    //public void generateRandomEncounter() {
+    //    encounter = new Encounter(this);
+    //}
     private void generatePossibleActions() {
         possibleActions = new Action[2];
         possibleActions[0] = actionMoveForwards;
         possibleActions[1] = actionMoveBack;
     }
 
+    public void removeNpc(Npc npc) {
+        if (npcs.length == 0) {
+            return;
+        }
+        if (npcs.length == 1) {
+            if (npcs[0] == npc) {
+                npcs = new Npc[0];
+                return;
+            }
+        }
+        Npc[] newNpcs = new Npc[npcs.length - 1];
+        int offset = 0;
+        for (int i = 0; i < npcs.length - 1; i++) {
+            if (npc == npcs[i] && offset == 0) {
+                offset++;
+            }
+            newNpcs[i] = npcs[i+offset];
+        }
+        if (offset == 1) {
+            newNpcs[newNpcs.length - 1] = npc;
+            npcs = newNpcs;
+        }
+    }
+
+    public Npc getNpc(String name) {
+        for (Npc npc : npcs) {
+            if (npc.getName().equals(name)) {
+                return npc;
+            }
+        }
+        return null;
+    }
 }

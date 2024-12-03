@@ -1,4 +1,4 @@
-package textGame;
+/*package textGame;
 
 public class Encounter {
     private Npc npc;
@@ -21,3 +21,4 @@ public class Encounter {
         generateRandomEncounter(scene);
     }
 }
+*/

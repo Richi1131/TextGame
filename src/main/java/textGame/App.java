@@ -9,18 +9,20 @@ public class App {
     public static void main(String[] args) throws Exception {
         scene.setPlayer(player);
         while (true) {
-            printSituation();
             playerTurn();
-            npcTurn();
+            for (Npc npc : player.scene.getNpcs()) {
+                npcTurn(npc);
+            }
         }
     }
     public static void printSituation() {
         System.out.println("Location: " + player.scene + " at " + player.scene.getPosition());
-        System.out.println("Encounter: " + player.scene.getNpc());
+        System.out.println("Encounter: " + player.scene.getNpcs());
     }
     public static void playerTurn() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
+            printSituation();
             String input = scanner.nextLine();
             input = input.toLowerCase();
             if (input.equals("help")) {
@@ -44,10 +46,13 @@ public class App {
                         player.attack(player);
                         return;
                     }
-                    else if (target.equals(player.scene.getNpc().toString())) {
-                        System.out.println("You try to hit " + player.scene.getNpc() + ".");
-                        player.attack(player.scene.getNpc());
+                    else if (player.scene.getNpc(target) != null) {
+                        System.out.println("You try to hit " + player.scene.getNpc(target) + ".");
+                        player.attack(player.scene.getNpc(target));
                         return;
+                    }
+                    else {
+                        System.out.println("Unknown target.");
                     }
                 }
             } else if (input.startsWith("wait")) {
@@ -57,8 +62,7 @@ public class App {
             }
         }
     }
-    public static void npcTurn() {
-        Npc npc = player.scene.getNpc();
+    public static void npcTurn(Npc npc) {
         if (npc != null) {
             npc.takeTurn();
         }

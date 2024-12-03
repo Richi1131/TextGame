@@ -1,22 +1,20 @@
 package textGame;
 
+import java.util.List;
 import java.util.Random;
 
 public class Npc extends Character implements Attack, Die {
-    private Encounter encounter;
-    private String name;
     private String description;
     private int damage;
 
-    public Npc(Encounter encounter) {
-        super(encounter.getScene());
-        this.encounter = encounter;
+    public Npc(Scene scene) {
+        super(scene);
         generateRandomNpc();
     }
     @Override
     public void onDeath() {
-        System.out.println(name + " has died.");
-        encounter.removeNpc();
+        System.out.println(getName() + " has died.");
+        scene.removeNpc(this);
     }
     public void generateRandomNpc() {
         Random rand = new Random();
@@ -29,7 +27,7 @@ public class Npc extends Character implements Attack, Die {
         String locationLine = Utility.readCsvLine("src/main/resources/npcs.csv", lineNumber);
         String[] locationInformation = locationLine.split(",");
 
-        this.name = locationInformation[0];
+        setName(locationInformation[0]);
         this.description = locationInformation[1];
         this.damage = Integer.parseInt(locationInformation[2]);
     }
@@ -41,7 +39,7 @@ public class Npc extends Character implements Attack, Die {
 
     @Override
     public String toString() {
-        return name;
+        return getName();
     }
     public void takeTurn() {
         attack(scene.getPlayer());
