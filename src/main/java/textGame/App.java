@@ -17,7 +17,7 @@ public class App {
     }
     public static void printSituation() {
         System.out.println("Location: " + player.scene + " at " + player.scene.getPosition());
-        System.out.println("Encounter: " + player.scene.getNpcs());
+        System.out.println("Encounter: " + Utility.characterArrayToString(player.scene.getNpcs()));
     }
     public static void playerTurn() {
         Scanner scanner = new Scanner(System.in);

@@ -56,4 +56,14 @@ public class Utility {
         }
         return 0;
     }
+    public static String characterArrayToString(Character[] characters) {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("( ");
+        for (Character character : characters) {
+            buffer.append(character.getName());
+            buffer.append(" ");
+        }
+        buffer.append(")");
+        return buffer.toString();
+    }
 }
