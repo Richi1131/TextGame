@@ -51,6 +51,22 @@ public class Scene extends GameObject {
     public boolean isExitOpen(int direction) {
         return openExits[direction];
     }
+    public GameObject getGameObjectByName(String name) {
+        if (name.equals(player.getName()) || name.equals("self")) {
+            return player;
+        }
+        for (Npc npc : npcs) {
+            if (npc.getName().equals(name)) {
+                return npc;
+            }
+        }
+        return null;
+        /*for (Item item : items) {
+            if (item.getName().equals(name)) {
+                return item;
+            }
+        }*/
+    }
     private Scene() {
         generateFromRandomLocation();
         addRandomNpc();

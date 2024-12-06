@@ -1,9 +1,7 @@
 # TODO
 ## Item System 
-### New Class: Item
+### New Class: Item extends GameObject
 #### Item - Attributes
-- Name
-- Description
 - Nutritional value? - no - interface Edible
 - currency value? 
 - weight? / inventory slots?

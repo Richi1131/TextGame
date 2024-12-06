@@ -8,6 +8,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         scene.setPlayer(player);
+        player.inventory.addItem(new HealingItem());
         while (true) {
             playerTurn();
             for (Npc npc : player.scene.getNpcs()) {
@@ -57,6 +58,15 @@ public class App {
                 }
             } else if (input.startsWith("wait")) {
                 return;
+            } else if (input.startsWith("use")) {
+                Item item = player.inventory.getItemByName(input.split(" ")[1]);
+                if (item != null) {
+                    if (item instanceof UsableOnGameObject usableOnGameObject) {
+                        GameObject target = player.scene.getGameObjectByName(input.split(" ")[2]);
+                        usableOnGameObject.useOn(target);
+                        // TODO: implement healing on body parts of characters
+                    }
+                }
             } else {
                 System.out.println("unknown input \"" + input + "\", use \"help\" for a list of commands");
             }

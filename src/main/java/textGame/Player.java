@@ -5,7 +5,7 @@ public class Player extends Character implements Attack {
 
     public Player(Scene scene) {
         super(scene);
-        setName("Player");
+        setName("player");
         setDescription("You");
     }
     /// move to connected scene 0 -> front, 1 -> right, 2 -> back, 3 -> left

@@ -2,9 +2,10 @@ package textGame;
 
 import java.util.Random;
 
-public abstract class Character extends GameObject implements Attackable, Die {
+public abstract class Character extends GameObject implements Attackable, Die, Health {
     public Scene scene;
     protected HumanoidBody body;
+    public Inventory inventory = new Inventory();
 
     public Character(Scene scene) {
         this.scene = scene;
@@ -23,7 +24,41 @@ public abstract class Character extends GameObject implements Attackable, Die {
         }
     }
     @Override
+    public int getMaxHealth() {
+        int sumMaxHealth = 0;
+        for (BodyPart bodyPart : body.getBodyParts()) {
+            sumMaxHealth = sumMaxHealth + bodyPart.getMaxHealth();
+        }
+        return sumMaxHealth;
+    }
+    @Override
+    public void setMaxHealth(int health) {
+
+    }
+    @Override
+    public int getHealth() {
+        int sumHealth = 0;
+        for (BodyPart bodyPart : body.getBodyParts()) {
+            sumHealth = sumHealth + bodyPart.getHealth();
+        }
+        return sumHealth;
+    }
+    @Override
+    public void setHealth(int health) {
+
+    }
+    @Override
+    public void heal(int amount) {
+        for (BodyPart bodyPart : body.getBodyParts()) {
+            if (bodyPart.getHealth() < bodyPart.getMaxHealth()) {
+                bodyPart.heal(amount);
+                return;
+            }
+        }
+    }
+    @Override
     public String toString() {
         return this.getName();
     }
+
 }

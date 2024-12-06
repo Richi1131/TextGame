@@ -1,10 +1,30 @@
 package textGame;
 
-public abstract class BodyPart extends GameObject implements Die, Attackable {
+public abstract class BodyPart extends GameObject implements Die, Health, Attackable {
+    private int maxHealth = 100;
     private int health = 100;
     private Body body;
+    @Override
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+    @Override
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+    @Override
     public int getHealth() {
         return health;
+    }
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
+    }
+    @Override
+    public void heal(int amount) {
+        System.out.println("Healed " + getBody().getCharacter().getName() + "'s " + getName() + " by " + (amount - getHealth()));
+        setHealth(Math.min(getMaxHealth(), getHealth() + amount));
+        System.out.println("New " + getName() + " Health is " + getHealth());
     }
     public Body getBody() {
         return body;

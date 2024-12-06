@@ -6,6 +6,13 @@ public class Body extends GameObject implements Die, Attackable {
     protected Head head;
     protected Torso torso;
     protected Limb[] limbs;
+    public BodyPart[] getBodyParts() {
+        BodyPart[] bodyParts = new BodyPart[limbs.length + 2];
+        bodyParts[0] = head;
+        bodyParts[1] = torso;
+        System.arraycopy(limbs, 0, bodyParts, 2, limbs.length);
+        return bodyParts;
+    }
 
     private Character character;
 

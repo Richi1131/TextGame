@@ -1,5 +1,5 @@
 package textGame;
 
-public class Item {
+public class Item extends GameObject{
 
 }
