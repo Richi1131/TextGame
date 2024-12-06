@@ -2,17 +2,10 @@ package textGame;
 
 import java.util.Random;
 
-public abstract class Character implements Attackable, Die {
-    private String name;
+public abstract class Character extends GameObject implements Attackable, Die {
     public Scene scene;
     protected HumanoidBody body;
 
-    public String getName() {
-        return this.name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
     public Character(Scene scene) {
         this.scene = scene;
         body = new HumanoidBody(this);
@@ -31,6 +24,6 @@ public abstract class Character implements Attackable, Die {
     }
     @Override
     public String toString() {
-        return this.name;
+        return this.getName();
     }
 }

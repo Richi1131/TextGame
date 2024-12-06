@@ -1,9 +1,8 @@
 package textGame;
 
-public abstract class BodyPart implements Die, Attackable {
+public abstract class BodyPart extends GameObject implements Die, Attackable {
     private int health = 100;
     private Body body;
-    private String name;
     public int getHealth() {
         return health;
     }
@@ -12,7 +11,7 @@ public abstract class BodyPart implements Die, Attackable {
     }
     public BodyPart(Body body, String name) {
         this.body = body;
-        this.name = name;
+        setName(name);
     }
     public void damage(int damage) {
         if (health > damage) {
@@ -31,6 +30,6 @@ public abstract class BodyPart implements Die, Attackable {
         return true;
     }
     public String toString() {
-        return this.name;
+        return this.getName();
     }
 }

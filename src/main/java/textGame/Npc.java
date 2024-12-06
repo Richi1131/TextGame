@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 public class Npc extends Character implements Attack, Die {
-    private String description;
     private int damage;
 
     public Npc(Scene scene) {
@@ -28,7 +27,7 @@ public class Npc extends Character implements Attack, Die {
         String[] locationInformation = locationLine.split(",");
 
         setName(locationInformation[0]);
-        this.description = locationInformation[1];
+        setDescription(locationInformation[1]);
         this.damage = Integer.parseInt(locationInformation[2]);
     }
 

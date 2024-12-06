@@ -4,12 +4,10 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
 
-public class Scene {
+public class Scene extends GameObject {
     private static int counter = 0;
     private static Hashtable<Position, Scene> sceneHashtable = new Hashtable<Position, Scene>();
     private Player player;
-    private String name;
-    private String description;
     private int danger;
     private int value;
     private Position position;
@@ -26,10 +24,6 @@ public class Scene {
     }
     public static Scene getByPosition(int x, int y) {
         return getByPosition(new Position(x, y));
-    }
-
-    public String getDescription() {
-        return this.description;
     }
     public Position getPosition() {
         return this.position;
@@ -74,14 +68,14 @@ public class Scene {
         Scene.sceneHashtable.put(position, this);
     }
     public String toString() {
-        return this.name;
+        return this.getName();
     }
     public void generateFromLocationsCSV(int lineNumber) {
         String locationLine = Utility.readCsvLine("src/main/resources/locations.csv", lineNumber);
         String[] locationInformation = locationLine.split(",");
 
-        this.name = locationInformation[0];
-        this.description = locationInformation[1];
+        setName(locationInformation[0]);
+        setDescription(locationInformation[1]);
         this.danger = Integer.parseInt(locationInformation[2]);
         this.value = Integer.parseInt(locationInformation[3]);
     }

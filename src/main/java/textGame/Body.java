@@ -2,7 +2,7 @@ package textGame;
 
 import java.util.Random;
 
-public class Body implements Die, Attackable {
+public class Body extends GameObject implements Die, Attackable {
     protected Head head;
     protected Torso torso;
     protected Limb[] limbs;

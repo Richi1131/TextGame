@@ -2,12 +2,18 @@
 ## Item System 
 ### New Class: Item
 #### Item - Attributes
+- Name
+- Description
 - Nutritional value? - no - interface Edible
-- currency value?
+- currency value? 
+- weight? / inventory slots?
+#### Item - Subclasses
+consumable
 ### New Interfaces
 - Sellable
-- BuyAble
+- BuyAble?
 - Edible
+- Drinkable? or combined Consumable? -> Interface Consume for characters
 - CarrieAble? are all Items CarrieAble?
 ### Inventory
 - Only player? - no -> Interface Inventory or attribute of Class Inventory
