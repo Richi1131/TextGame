@@ -26,52 +26,75 @@ public class App {
             printSituation();
             String input = scanner.nextLine();
             input = input.toLowerCase();
-            if (input.equals("help")) {
-                String leftAlignFormat = "| %-15s | %-4d |%n";
-                System.out.format("+---------+-----------+%n");
-                System.out.format("| command |description|%n");
-                System.out.format("+---------+-----------+%n");
-
-                System.out.format("+---------+-----------+%n");
+            if (input.startsWith("help")) {
+                playerCommandHelp(input);
             } else if (input.startsWith("move ")) {
-                if (input.matches("move [0-3]")) {
-                    player.move(input.charAt(5) - '0');
-                }
+                playerCommandMove(input);
             } else if (input.startsWith("look")) {
-                System.out.println("You see " + player.scene.getDescription() + ".");
+                playerCommandLook(input);
             } else if (input.startsWith("attack ")) {
-                if (input.matches("attack [a-z]*")) {
-                    String target = input.split(" ")[1];
-                    if (target.equals("self")) {
-                        System.out.println("You try to hit yourself.");
-                        player.attack(player);
-                        return;
-                    }
-                    else if (player.scene.getNpc(target) != null) {
-                        System.out.println("You try to hit " + player.scene.getNpc(target) + ".");
-                        player.attack(player.scene.getNpc(target));
-                        return;
-                    }
-                    else {
-                        System.out.println("Unknown target.");
-                    }
-                }
+                if (playerCommandAttack(input)) return;
             } else if (input.startsWith("wait")) {
                 return;
             } else if (input.startsWith("use")) {
-                Item item = player.inventory.getItemByName(input.split(" ")[1]);
-                if (item != null) {
-                    if (item instanceof UsableOnGameObject usableOnGameObject) {
-                        GameObject target = player.scene.getGameObjectByName(input.split(" ")[2]);
-                        usableOnGameObject.useOn(target);
-                        // TODO: implement healing on body parts of characters
-                    }
-                }
+                if (playerCommandUse(input)) return;
             } else {
                 System.out.println("unknown input \"" + input + "\", use \"help\" for a list of commands");
             }
         }
     }
+
+    private static boolean playerCommandUse(String input) {
+        Item item = player.inventory.getItemByName(input.split(" ")[1]);
+        if (item != null) {
+            if (item instanceof UsableOnGameObject usableOnGameObject) {
+                GameObject target = player.scene.getGameObjectByName(input.split(" ")[2]);
+                return usableOnGameObject.useOn(target);
+                // TODO: implement healing on body parts of characters
+            }
+        }
+        return false;
+    }
+
+    private static boolean playerCommandAttack(String input) {
+        if (input.matches("attack [a-z]*")) {
+            String target = input.split(" ")[1];
+            if (target.equals("self")) {
+                System.out.println("You try to hit yourself.");
+                player.attack(player);
+                return true;
+            }
+            else if (player.scene.getNpc(target) != null) {
+                System.out.println("You try to hit " + player.scene.getNpc(target) + ".");
+                player.attack(player.scene.getNpc(target));
+                return true;
+            }
+            else {
+                System.out.println("Unknown target.");
+            }
+        }
+        return false;
+    }
+
+    private static void playerCommandLook(String input) {
+        System.out.println("You see " + player.scene.getDescription() + ".");
+    }
+
+    private static void playerCommandMove(String input) {
+        if (input.matches("move [0-3]")) {
+            player.move(input.charAt(5) - '0');
+        }
+    }
+
+    private static void playerCommandHelp(String input) {
+        String leftAlignFormat = "| %-15s | %-4d |%n";
+        System.out.format("+---------+-----------+%n");
+        System.out.format("| command |description|%n");
+        System.out.format("+---------+-----------+%n");
+
+        System.out.format("+---------+-----------+%n");
+    }
+
     public static void npcTurn(Npc npc) {
         if (npc != null) {
             npc.takeTurn();

@@ -17,17 +17,8 @@ public class HealingItem extends Item implements UsableOnGameObject {
             health.heal(getHealAmount());
             return true;
         }
-        else if (gameObject instanceof Character character) {
-            System.out.println("What part of " + character + " do you want to heal?");
-            System.out.println("The available Options are: ");
-            System.out.println();
-            BodyPart[] bodyParts = character.body.getBodyParts();
-            for (int i = 0; i < bodyParts.length; i++) {
-                System.out.println(i+1 + ". "+ bodyParts[i]);
-            }
-            return false;
-        }
         else {
+            System.out.println("You cannot heal " + gameObject + ".");
             return false;
         }
     }
