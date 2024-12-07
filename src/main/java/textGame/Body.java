@@ -42,5 +42,14 @@ public class Body extends GameObject implements Die, Attackable {
     public void onDeath() {
         character.onDeath();
     }
+
+    public GameObject getBodyPartByName(String name) {
+        for (BodyPart bodyPart : getBodyParts()) {
+            if (bodyPart != null && bodyPart.getName().equals(name)) {
+                return bodyPart;
+            }
+        }
+        return null;
+    }
 }
 

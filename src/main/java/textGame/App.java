@@ -45,12 +45,25 @@ public class App {
     }
 
     private static boolean playerCommandUse(String input) {
-        Item item = player.inventory.getItemByName(input.split(" ")[1]);
-        if (item != null) {
-            if (item instanceof UsableOnGameObject usableOnGameObject) {
-                GameObject target = player.scene.getGameObjectByName(input.split(" ")[2]);
-                return usableOnGameObject.useOn(target);
-                // TODO: implement healing on body parts of characters
+        // TODO: refactor
+        // BUG: currently entries are being separated by spaces, but some names contain spaces such as 'right leg'
+        if (input.matches("use [a-z]*.*")) {
+            Item item = player.inventory.getItemByName(input.split(" ")[1]);
+            if (item != null) {
+                if (item instanceof UsableOnGameObject usableOnGameObject) {
+                    if (input.matches("use [a-z]* [a-z]*.*")) {
+                        GameObject target = player.scene.getGameObjectByName(input.split(" ")[2]);
+                        if (input.matches("use [a-z]* [a-z]* [a-z]*")) {
+                            if (target instanceof Character targetCharacter) {
+                                if (targetCharacter.body.getBodyPartByName(input.split(" ")[3]) != null) {
+                                    target = targetCharacter.body.getBodyPartByName(input.split(" ")[3]);
+                                }
+                            }
+                            return usableOnGameObject.useOn(target);
+                            // TODO: add feedback for invalid input
+                        }
+                    }
+                }
             }
         }
         return false;
