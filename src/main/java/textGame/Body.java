@@ -22,6 +22,7 @@ public class Body extends GameObject implements Die, Attackable {
 
     public Body (Character character) {
         this.character = character;
+        setName(character + "'s_body");
     }
     @Override
     public boolean getAttacked(int damage) {

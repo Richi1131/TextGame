@@ -27,41 +27,45 @@ public class App {
             String input = scanner.nextLine();
             input = input.toLowerCase();
             if (input.startsWith("help")) {
-                playerCommandHelp(input);
+                playerCommandHelp(input.split(" "));
             } else if (input.startsWith("move ")) {
-                playerCommandMove(input);
+                playerCommandMove(input.split(" "));
             } else if (input.startsWith("look")) {
-                playerCommandLook(input);
+                playerCommandLook(input.split(" "));
             } else if (input.startsWith("attack ")) {
-                if (playerCommandAttack(input)) return;
+                if (playerCommandAttack(input.split(" ")))
+                    return;
             } else if (input.startsWith("wait")) {
                 return;
             } else if (input.startsWith("use")) {
-                if (playerCommandUse(input)) return;
+                if (playerCommandUse(input.split(" "))) return;
             } else {
                 System.out.println("unknown input \"" + input + "\", use \"help\" for a list of commands");
             }
         }
     }
 
-    private static boolean playerCommandUse(String input) {
+    private static boolean playerCommandUse(String[] args) {
         // TODO: refactor
         // BUG: currently entries are being separated by spaces, but some names contain spaces such as 'right leg'
-        if (input.matches("use [a-z]*.*")) {
-            Item item = player.inventory.getItemByName(input.split(" ")[1]);
+        if (args.length >= 2) {
+            Item item = player.inventory.getItemByName(args[1]);
             if (item != null) {
                 if (item instanceof UsableOnGameObject usableOnGameObject) {
-                    if (input.matches("use [a-z]* [a-z]*.*")) {
-                        GameObject target = player.scene.getGameObjectByName(input.split(" ")[2]);
-                        if (input.matches("use [a-z]* [a-z]* [a-z]*")) {
+                    if (args.length >= 3) {
+                        GameObject target = player.scene.getGameObjectByName(args[2]);
+                        if (args.length == 4) {
                             if (target instanceof Character targetCharacter) {
-                                if (targetCharacter.body.getBodyPartByName(input.split(" ")[3]) != null) {
-                                    target = targetCharacter.body.getBodyPartByName(input.split(" ")[3]);
+                                if (targetCharacter.body.getBodyPartByName(args[3]) != null) {
+                                    target = targetCharacter.body.getBodyPartByName(args[3]);
+                                }
+                                else {
+                                    System.out.println(args[3] + " is not a BodyPart of " + targetCharacter.body);
                                 }
                             }
-                            return usableOnGameObject.useOn(target);
                             // TODO: add feedback for invalid input
                         }
+                        return usableOnGameObject.useOn(target);
                     }
                 }
             }
@@ -69,9 +73,9 @@ public class App {
         return false;
     }
 
-    private static boolean playerCommandAttack(String input) {
-        if (input.matches("attack [a-z]*")) {
-            String target = input.split(" ")[1];
+    private static boolean playerCommandAttack(String[] args) {
+        if (args.length == 2) {
+            String target = args[1];
             if (target.equals("self")) {
                 System.out.println("You try to hit yourself.");
                 player.attack(player);
@@ -89,17 +93,17 @@ public class App {
         return false;
     }
 
-    private static void playerCommandLook(String input) {
+    private static void playerCommandLook(String[] args) {
         System.out.println("You see " + player.scene.getDescription() + ".");
     }
 
-    private static void playerCommandMove(String input) {
-        if (input.matches("move [0-3]")) {
-            player.move(input.charAt(5) - '0');
+    private static void playerCommandMove(String[] args) {
+        if (args.length == 2){
+            player.move(args[1].charAt(0) - '0');
         }
     }
 
-    private static void playerCommandHelp(String input) {
+    private static void playerCommandHelp(String[] args) {
         String leftAlignFormat = "| %-15s | %-4d |%n";
         System.out.format("+---------+-----------+%n");
         System.out.format("| command |description|%n");
