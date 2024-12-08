@@ -4,12 +4,11 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
 
-public class Scene extends GameObject {
+public class Scene extends GameObject implements Searchable {
     private static int counter = 0;
     private static Hashtable<Position, Scene> sceneHashtable = new Hashtable<Position, Scene>();
     private Player player;
-    private int danger;
-    private int value;
+    private Inventory inventory = new Inventory();
     private Position position;
     private Npc[] npcs = new Npc[0];
 
@@ -92,8 +91,8 @@ public class Scene extends GameObject {
 
         setName(locationInformation[0]);
         setDescription(locationInformation[1]);
-        this.danger = Integer.parseInt(locationInformation[2]);
-        this.value = Integer.parseInt(locationInformation[3]);
+        //this.danger = Integer.parseInt(locationInformation[2]);
+        //this.value = Integer.parseInt(locationInformation[3]);
     }
     public void generateFromRandomLocation() {
         Random rand = new Random();
@@ -141,5 +140,10 @@ public class Scene extends GameObject {
             }
         }
         return null;
+    }
+
+    @Override
+    public Inventory getInventory() {
+        return inventory;
     }
 }

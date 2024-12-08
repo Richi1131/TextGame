@@ -10,7 +10,7 @@ public class GameObject {
         return this.description;
     }
     public void setName(String name) {
-        this.name = name;
+        this.name = name.replace(" ", "_");
     }
     public void setDescription(String description) {
         this.description = description;

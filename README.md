@@ -22,3 +22,7 @@ consumable
 ### New Interface: Talk
 ## Inspect interaction
 See Properties of Items and Characters upon Inspection
+## Search interaction
+### new interface searchable
+- method searchInventory by item name
+- enforce method getItemByName

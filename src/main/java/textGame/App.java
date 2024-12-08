@@ -39,8 +39,18 @@ public class App {
                 return;
             } else if (input.startsWith("use")) {
                 if (playerCommandUse(input.split(" "))) return;
+            } else if (input.startsWith("search")) {
+                playerCommandSearch(input.split(" "));
             } else {
                 System.out.println("unknown input \"" + input + "\", use \"help\" for a list of commands");
+            }
+        }
+    }
+
+    private static void playerCommandSearch(String[] args) {
+        if (args.length >= 2) {
+            if (args[1].equals("scene")) {
+                player.scene.search();
             }
         }
     }

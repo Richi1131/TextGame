@@ -2,6 +2,9 @@ package textGame;
 
 public class Inventory {
     private Item[] items = new Item[3];
+    public Item[] getItems() {
+        return items;
+    }
     public Item getItemByName(String name) {
         for (Item item : items) {
             if (item != null && item.getName().equals(name)) {
