@@ -41,9 +41,18 @@ public class App {
                 if (playerCommandUse(input.split(" "))) return;
             } else if (input.startsWith("search")) {
                 playerCommandSearch(input.split(" "));
+            } else if (input.startsWith("loot")) {
+                playerCommandLoot(input.split(" "));
             } else {
                 System.out.println("unknown input \"" + input + "\", use \"help\" for a list of commands");
             }
+        }
+    }
+
+    private static void playerCommandLoot(String[] args) {
+        if (args.length >= 2) {
+            // TODO: bug if player inventory is full item gets removed from scene, but not added to player
+            player.inventory.addItem(player.scene.loot(args[1]));
         }
     }
 

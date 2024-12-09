@@ -4,9 +4,11 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
 
-public class Scene extends GameObject implements Searchable {
+public class Scene extends GameObject implements Searchable, Lootable {
     private static int counter = 0;
     private static Hashtable<Position, Scene> sceneHashtable = new Hashtable<Position, Scene>();
+    private int danger;
+    private int value;
     private Player player;
     private Inventory inventory = new Inventory();
     private Position position;
@@ -17,6 +19,7 @@ public class Scene extends GameObject implements Searchable {
     private Action[] possibleActions;
     private static Action actionMoveForwards = new Action("Move down the road.");
     private static Action actionMoveBack = new Action("Go back.");
+
 
     public static Scene getByPosition(Position position) {
         return sceneHashtable.get(position);
@@ -69,6 +72,7 @@ public class Scene extends GameObject implements Searchable {
     private Scene() {
         generateFromRandomLocation();
         addRandomNpc();
+        addRandomLoot();
         counter++;
     }
     Scene(Position position) {
@@ -91,14 +95,18 @@ public class Scene extends GameObject implements Searchable {
 
         setName(locationInformation[0]);
         setDescription(locationInformation[1]);
-        //this.danger = Integer.parseInt(locationInformation[2]);
-        //this.value = Integer.parseInt(locationInformation[3]);
+        this.danger = Integer.parseInt(locationInformation[2]);
+        this.value = Integer.parseInt(locationInformation[3]);
     }
     public void generateFromRandomLocation() {
         Random rand = new Random();
         int lowerBound = 1;
         int upperBound = Utility.readFileLength("src/main/resources/locations.csv");
         generateFromLocationsCSV(rand.nextInt(lowerBound, upperBound));
+    }
+    public void addRandomLoot() {
+        // TODO: add random item generation
+        inventory.addItem(HealingItem.generateFromCSV(1));
     }
     //public void generateRandomEncounter() {
     //    encounter = new Encounter(this);

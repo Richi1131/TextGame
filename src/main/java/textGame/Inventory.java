@@ -22,4 +22,13 @@ public class Inventory {
         }
         return false;
     }
+    public boolean removeItem(Item item) {
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] == item) {
+                items[i] = null;
+                return true;
+            }
+        }
+        return false;
+    }
 }
