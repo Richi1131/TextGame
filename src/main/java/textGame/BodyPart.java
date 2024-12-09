@@ -22,7 +22,7 @@ public abstract class BodyPart extends GameObject implements Die, Health, Attack
     }
     @Override
     public void heal(int amount) {
-        System.out.println("Healed " + getBody().getCharacter().getName() + "'s " + getName() + " by " + (amount - getHealth()));
+        System.out.println("Healed " + getBody().getCharacter().getName() + "'s " + getName() + " by " + Math.min((getMaxHealth() - getHealth()), amount));
         setHealth(Math.min(getMaxHealth(), getHealth() + amount));
         System.out.println("New " + getName() + " Health is " + getHealth());
     }
