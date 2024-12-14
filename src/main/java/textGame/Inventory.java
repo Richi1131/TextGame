@@ -31,4 +31,12 @@ public class Inventory {
         }
         return false;
     }
+    public String toString() {
+        String output = "( ";
+        for (int i = 0; i < items.length; i++) {
+            output = output + items[i] + " ";
+        }
+        output = output + ")";
+        return output;
+    }
 }
