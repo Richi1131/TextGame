@@ -59,6 +59,7 @@ public class App {
         if (args.length == 1) {
             System.out.println("Argument too short");
             System.out.println("loot <target_item> <target_container>");
+            return;
         }
         if (args.length == 3) {
             // TODO: bug if player inventory is full item gets removed from scene, but not added to player
@@ -66,6 +67,7 @@ public class App {
             if (args[2].equals("scene")) {
                 player.inventory.addItem(player.scene.loot(args[1]));
             }
+            return;
         }
     }
 
@@ -80,25 +82,41 @@ public class App {
     private static boolean playerCommandUse(String[] args) {
         // TODO: refactor
         // BUG: currently entries are being separated by spaces, but some names contain spaces such as 'right leg'
-        if (args.length >= 2) {
+        if (args.length == 1 ) {
+            System.out.println("Argument too short");
+            System.out.println("use <item> <?target> <?subtarget>");
+            return false;
+        }
+        if (args.length == 2) {
+            // TODO: items usable without target
+            return false;
+        }
+        if (args.length == 3) {
             Item item = player.inventory.getItemByName(args[1]);
-            if (item != null) {
-                if (item instanceof UsableOnGameObject usableOnGameObject) {
-                    if (args.length >= 3) {
-                        GameObject target = player.scene.getGameObjectByName(args[2]);
-                        if (args.length == 4) {
-                            if (target instanceof Character targetCharacter) {
-                                if (targetCharacter.body.getBodyPartByName(args[3]) != null) {
-                                    target = targetCharacter.body.getBodyPartByName(args[3]);
-                                }
-                                else {
-                                    System.out.println(args[3] + " is not a BodyPart of " + targetCharacter.body);
-                                }
-                            }
-                            // TODO: add feedback for invalid input
-                        }
+            if (item instanceof UsableOnGameObject usableOnGameObject) {
+                GameObject target = player.scene.getGameObjectByName(args[2]);
+                return usableOnGameObject.useOn(target);
+            }
+            else {
+                System.out.println(args[1] + " is not usable.");
+            }
+        }
+        if (args.length == 4) {
+            Item item = player.inventory.getItemByName(args[1]);
+            if (item instanceof UsableOnGameObject usableOnGameObject) {
+                GameObject target = player.scene.getGameObjectByName(args[2]);
+                if (target instanceof  Character targetCharacter) {
+                    if (targetCharacter.body.getBodyPartByName(args[3]) != null) {
+                        target = targetCharacter.body.getBodyPartByName(args[3]);
                         return usableOnGameObject.useOn(target);
                     }
+                    else {
+                        System.out.println(args[3] + " is not a BodyPart of " + targetCharacter.body);
+                        return false;
+                    }
+                } else {
+                    System.out.println(args[3] + "has no subtargets.");
+                    return false;
                 }
             }
         }
