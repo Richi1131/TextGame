@@ -63,9 +63,17 @@ public class App {
         }
         if (args.length == 3) {
             // TODO: bug if player inventory is full item gets removed from scene, but not added to player
-            player.inventory.addItem(player.scene.loot(args[1]));
             if (args[2].equals("scene")) {
                 player.inventory.addItem(player.scene.loot(args[1]));
+            }
+            else {
+                GameObject target = player.scene.getGameObjectByName(args[2]);
+                if (target instanceof Lootable lootable) {
+                    player.inventory.addItem(lootable.loot(args[1]));
+                }
+                else {
+                    System.out.println(target + " is not lootable.");
+                }
             }
             return;
         }
