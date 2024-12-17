@@ -5,9 +5,12 @@ import java.util.Random;
 public abstract class Character extends GameObject implements Attackable, Die, Health {
     public Scene scene;
     protected HumanoidBody body;
-    public Inventory inventory = new Inventory();
+    private Inventory inventory = new Inventory();
     protected boolean isAlive = true;
 
+    public Inventory getInventory() {
+        return inventory;
+    }
     @Override
     public boolean isDead() {
         return !isAlive;

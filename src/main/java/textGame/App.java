@@ -8,7 +8,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         scene.setPlayer(player);
-        player.inventory.addItem(HealingItem.generateFromCSV(1));
+        player.getInventory().addItem(HealingItem.generateFromCSV(1));
         while (true) {
             playerTurn();
             for (Npc npc : player.scene.getNpcs()) {
@@ -52,7 +52,7 @@ public class App {
     }
 
     private static void playerCommandInventory(String[] args) {
-        System.out.println(player.inventory);
+        System.out.println(player.getInventory());
     }
 
     private static void playerCommandLoot(String[] args) {
@@ -64,12 +64,12 @@ public class App {
         if (args.length == 3) {
             // TODO: bug if player inventory is full item gets removed from scene, but not added to player
             if (args[2].equals("scene")) {
-                player.inventory.addItem(player.scene.loot(args[1]));
+                player.loot(player.scene, args[1]);
             }
             else {
                 GameObject target = player.scene.getGameObjectByName(args[2]);
                 if (target instanceof Lootable lootable) {
-                    player.inventory.addItem(lootable.loot(args[1]));
+                    player.loot(lootable, args[1]);
                 }
                 else {
                     System.out.println(target + " is not lootable.");
@@ -109,7 +109,7 @@ public class App {
             return false;
         }
         if (args.length == 3) {
-            Item item = player.inventory.getItemByName(args[1]);
+            Item item = player.getInventory().getItemByName(args[1]);
             if (item instanceof UsableOnGameObject usableOnGameObject) {
                 GameObject target = player.scene.getGameObjectByName(args[2]);
                 return usableOnGameObject.useOn(target);
@@ -119,7 +119,7 @@ public class App {
             }
         }
         if (args.length == 4) {
-            Item item = player.inventory.getItemByName(args[1]);
+            Item item = player.getInventory().getItemByName(args[1]);
             if (item instanceof UsableOnGameObject usableOnGameObject) {
                 GameObject target = player.scene.getGameObjectByName(args[2]);
                 if (target instanceof  Character targetCharacter) {

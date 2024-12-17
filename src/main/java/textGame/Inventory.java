@@ -31,6 +31,16 @@ public class Inventory {
         }
         return false;
     }
+    public boolean isFull() {
+        boolean isFull = true;
+        for (Item item : items) {
+            if (item == null) {
+                isFull = false;
+                break;
+            }
+        }
+        return isFull;
+    }
     public String toString() {
         String output = "( ";
         for (int i = 0; i < items.length; i++) {

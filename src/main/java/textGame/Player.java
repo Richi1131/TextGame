@@ -1,6 +1,6 @@
 package textGame;
 
-public class Player extends Character implements Attack {
+public class Player extends Character implements Attack, Loot {
     private int damage = 100;
 
     public Player(Scene scene) {
