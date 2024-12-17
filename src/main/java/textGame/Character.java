@@ -6,7 +6,12 @@ public abstract class Character extends GameObject implements Attackable, Die, H
     public Scene scene;
     protected HumanoidBody body;
     public Inventory inventory = new Inventory();
+    protected boolean isAlive = true;
 
+    @Override
+    public boolean isDead() {
+        return !isAlive;
+    }
     public Character(Scene scene) {
         this.scene = scene;
         body = new HumanoidBody(this);

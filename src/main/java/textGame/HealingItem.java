@@ -26,7 +26,7 @@ public class HealingItem extends Item implements UsableOnGameObject {
     }
     @Override
     public boolean useOn(GameObject gameObject) {
-        // TODO: move uses logic to Usable on game Object interface
+        // TODO: move 'uses' logic to Usable on game Object interface
         if (uses < 1) {
             System.out.println(getName() + " is used up.");
             return false;

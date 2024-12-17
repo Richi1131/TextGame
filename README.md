@@ -1,5 +1,5 @@
 # TODO
-## Item System 
+## Item System
 ### New Class: Item extends GameObject
 #### Item - Attributes
 - Nutritional value? - no - interface Edible

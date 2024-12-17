@@ -104,10 +104,6 @@ public class Scene extends GameObject implements Searchable, Lootable {
         int upperBound = Utility.readFileLength("src/main/resources/locations.csv");
         generateFromLocationsCSV(rand.nextInt(lowerBound, upperBound));
     }
-    public void addRandomLoot() {
-        // TODO: add random item generation
-        inventory.addItem(HealingItem.generateFromCSV(1));
-    }
     //public void generateRandomEncounter() {
     //    encounter = new Encounter(this);
     //}

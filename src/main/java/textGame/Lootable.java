@@ -8,4 +8,8 @@ public interface Lootable {
         inventory.removeItem(item);
         return item;
     }
+    default public void addRandomLoot() {
+        // TODO: add random item generation
+        getInventory().addItem(HealingItem.generateFromCSV(1));
+    }
 }

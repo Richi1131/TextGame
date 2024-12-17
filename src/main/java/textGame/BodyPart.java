@@ -52,4 +52,8 @@ public abstract class BodyPart extends GameObject implements Die, Health, Attack
     public String toString() {
         return this.getName();
     }
+    @Override
+    public boolean isDead() {
+        return (health <= 0);
+    }
 }

@@ -76,6 +76,15 @@ public class App {
             if (args[1].equals("scene")) {
                 player.scene.search();
             }
+            else {
+                GameObject target = player.scene.getGameObjectByName(args[1]);
+                if (target instanceof Searchable searchable) {
+                    searchable.search();
+                }
+                else {
+                    System.out.println(target + " is not searchable.");
+                }
+            }
         }
     }
 
