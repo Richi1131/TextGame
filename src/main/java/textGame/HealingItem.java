@@ -41,4 +41,13 @@ public class HealingItem extends Item implements UsableOnGameObject {
             return false;
         }
     }
+
+    @Override
+    public void inspect() {
+        System.out.println("Inspected Item:");
+        System.out.println("    Name: " + getName());
+        System.out.println("    Descripion: " + getDescription());
+        System.out.println("    Heal Amount: " + healAmount);
+        System.out.println("    Remaining Uses: " + uses);
+    }
 }

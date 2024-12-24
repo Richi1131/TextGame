@@ -26,27 +26,46 @@ public class App {
             printSituation();
             String input = scanner.nextLine();
             input = input.toLowerCase();
-            if (input.startsWith("help")) {
-                playerCommandHelp(input.split(" "));
-            } else if (input.startsWith("move ")) {
-                playerCommandMove(input.split(" "));
-            } else if (input.startsWith("look")) {
-                playerCommandLook(input.split(" "));
-            } else if (input.startsWith("attack ")) {
-                if (playerCommandAttack(input.split(" ")))
-                    return;
-            } else if (input.startsWith("wait")) {
-                return;
-            } else if (input.startsWith("use")) {
-                if (playerCommandUse(input.split(" "))) return;
-            } else if (input.startsWith("search")) {
-                playerCommandSearch(input.split(" "));
-            } else if (input.startsWith("loot")) {
-                playerCommandLoot(input.split(" "));
-            } else if (input.startsWith("inventory")) {
-                playerCommandInventory(input.split(" "));
-            } else {
-                System.out.println("unknown input \"" + input + "\", use \"help\" for a list of commands");
+            if (evaluatePlayerInput(input)) return;
+
+        }
+    }
+
+    private static boolean evaluatePlayerInput(String input) {
+        if (input.startsWith("help")) {
+            playerCommandHelp(input.split(" "));
+        } else if (input.startsWith("move ")) {
+            playerCommandMove(input.split(" "));
+        } else if (input.startsWith("look")) {
+            playerCommandLook(input.split(" "));
+        } else if (input.startsWith("attack ")) {
+            if (playerCommandAttack(input.split(" ")))
+                return true;
+        } else if (input.startsWith("wait")) {
+            return true;
+        } else if (input.startsWith("use")) {
+            if (playerCommandUse(input.split(" "))) return true;
+        } else if (input.startsWith("search")) {
+            playerCommandSearch(input.split(" "));
+        } else if (input.startsWith("loot")) {
+            playerCommandLoot(input.split(" "));
+        } else if (input.startsWith("inventory")) {
+            playerCommandInventory(input.split(" "));
+        } else if (input.startsWith("inspect")) {
+            playerCommandInspect(input.split(" "));
+        } else {
+            System.out.println("unknown input \"" + input + "\", use \"help\" for a list of commands");
+        }
+        return false;
+    }
+
+    private static void playerCommandInspect(String[] args) {
+        // todo: make items outside of player inventory targetable
+        if (args.length == 2) {
+
+            GameObject target = player.getInventory().getItemByName(args[1]);
+            if (target instanceof Inspectable inspectable) {
+                inspectable.inspect();
             }
         }
     }
