@@ -8,7 +8,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         scene.setPlayer(player);
-        player.getInventory().addItem(HealingItem.generateFromCSV(1));
+        player.getInventory().addItem(FactoryManager.generateRandomLoot());
         while (true) {
             playerTurn();
             for (Npc npc : player.scene.getNpcs()) {

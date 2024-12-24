@@ -18,7 +18,6 @@ public interface Lootable {
         }
     }
     default public void addRandomLoot() {
-        // TODO: add random item generation
-        getInventory().addItem(HealingItem.generateFromCSV(new Random().nextInt(1, Utility.readFileLength("src/main/resources/healing_items.csv"))));
+        getInventory().addItem(FactoryManager.generateRandomLoot());
     }
 }
