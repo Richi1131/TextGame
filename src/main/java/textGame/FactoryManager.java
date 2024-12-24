@@ -11,4 +11,8 @@ public class FactoryManager {
         // todo: roll for rarety?
         return factory.createRandomFromCsv();
     }
+    public static Npc generateRandomNpc() {
+        NpcFactory factory = new NpcFactory();
+        return factory.createRandomFromCsv();
+    }
 }

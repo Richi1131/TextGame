@@ -4,7 +4,7 @@ public class Player extends Character implements Attack, Loot {
     private int damage = 100;
 
     public Player(Scene scene) {
-        super(scene);
+        setScene(scene);
         setName("player");
         setDescription("You");
     }
@@ -34,6 +34,17 @@ public class Player extends Character implements Attack, Loot {
     @Override
     public int getDamage() {
         return damage;
+    }
+
+    @Override
+    public void setScene(Scene scene) {
+        if (this.scene != null) {
+            this.scene.setPlayer(null);
+        }
+        this.scene = scene;
+        if (this.scene != null) {
+            this.scene.setPlayer(this);
+        }
     }
 }
 

@@ -16,10 +16,6 @@ public class Scene extends GameObject implements Searchable, Lootable {
 
     /// scenes connected to current scene in space 0 -> front, 1 -> right, 2 -> back, 3 -> left
     private Boolean[] openExits = {true, true, true, true};
-    private Action[] possibleActions;
-    private static Action actionMoveForwards = new Action("Move down the road.");
-    private static Action actionMoveBack = new Action("Go back.");
-
 
     public static Scene getByPosition(Position position) {
         return sceneHashtable.get(position);
@@ -36,9 +32,6 @@ public class Scene extends GameObject implements Searchable, Lootable {
     public void setPlayer(Player player) {
         this.player = player;
     }
-    public void addRandomNpc() {
-        addNpc(new Npc(this));
-    }
     public void addNpc(Npc npc) {
         Npc[] newNpcs = new Npc[npcs.length + 1];
         for (int i = 0; i < npcs.length; i++) {
@@ -46,6 +39,7 @@ public class Scene extends GameObject implements Searchable, Lootable {
         }
         newNpcs[newNpcs.length-1] = npc;
         npcs = newNpcs;
+        npc.setScene(this);
     }
     public Npc[] getNpcs() {
         return npcs;
@@ -71,7 +65,7 @@ public class Scene extends GameObject implements Searchable, Lootable {
     }
     private Scene() {
         generateFromRandomLocation();
-        addRandomNpc();
+        addNpc(FactoryManager.generateRandomNpc());
         addRandomLoot();
         counter++;
     }
@@ -103,14 +97,6 @@ public class Scene extends GameObject implements Searchable, Lootable {
         int lowerBound = 1;
         int upperBound = Utility.readFileLength("src/main/resources/locations.csv");
         generateFromLocationsCSV(rand.nextInt(lowerBound, upperBound));
-    }
-    //public void generateRandomEncounter() {
-    //    encounter = new Encounter(this);
-    //}
-    private void generatePossibleActions() {
-        possibleActions = new Action[2];
-        possibleActions[0] = actionMoveForwards;
-        possibleActions[1] = actionMoveBack;
     }
 
     public void removeNpc(Npc npc) {

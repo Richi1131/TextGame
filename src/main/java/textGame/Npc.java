@@ -7,9 +7,8 @@ public class Npc extends Character implements Attack, Searchable, Lootable {
     private int damage;
     private Inventory inventory = new Inventory();
 
-    public Npc(Scene scene) {
-        super(scene);
-        generateRandomNpc();
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
     @Override
     public void onDeath() {
@@ -22,22 +21,6 @@ public class Npc extends Character implements Attack, Searchable, Lootable {
             System.out.println(getName() + " is already dead.");
         }
     }
-    public void generateRandomNpc() {
-        Random rand = new Random();
-        int lowerBound = 1;
-        int upperBound = Utility.readFileLength("src/main/resources/locations.csv");
-        generateFromNpcsCSV(rand.nextInt(lowerBound, upperBound));
-        addRandomLoot();
-    }
-
-    private void generateFromNpcsCSV(int lineNumber) {
-        String locationLine = Utility.readCsvLine("src/main/resources/npcs.csv", lineNumber);
-        String[] locationInformation = locationLine.split(",");
-
-        setName(locationInformation[0]);
-        setDescription(locationInformation[1]);
-        this.damage = Integer.parseInt(locationInformation[2]);
-    }
     @Override
     public int getDamage() {
         return damage;
@@ -49,6 +32,11 @@ public class Npc extends Character implements Attack, Searchable, Lootable {
     }
     public void takeTurn() {
         attack(scene.getPlayer());
+    }
+
+    @Override
+    public void setScene(Scene scene) {
+        this.scene = scene;
     }
 
     @Override

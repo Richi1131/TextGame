@@ -8,6 +8,8 @@ public abstract class Character extends GameObject implements Attackable, Die, H
     private Inventory inventory = new Inventory();
     protected boolean isAlive = true;
 
+    public abstract void setScene(Scene scene);
+
     public Inventory getInventory() {
         return inventory;
     }
@@ -15,8 +17,7 @@ public abstract class Character extends GameObject implements Attackable, Die, H
     public boolean isDead() {
         return !isAlive;
     }
-    public Character(Scene scene) {
-        this.scene = scene;
+    public Character() {
         body = new HumanoidBody(this);
     }
     @Override

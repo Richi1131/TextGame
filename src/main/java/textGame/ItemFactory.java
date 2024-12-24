@@ -1,7 +1,5 @@
 package textGame;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 public abstract class ItemFactory {

@@ -199,7 +199,7 @@ public class App {
     }
 
     public static void npcTurn(Npc npc) {
-        if (npc != null) {
+        if (npc != null && npc.isAlive) {
             npc.takeTurn();
         }
     }
