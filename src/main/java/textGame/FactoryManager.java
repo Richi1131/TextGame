@@ -19,4 +19,8 @@ public class FactoryManager {
         BodyFactory factory = new HumanoidBodyFactory();
         return factory.create();
     }
+    public static Scene generateRandomScene() {
+        SceneFactory factory = new SceneFactory();
+        return (Scene) factory.createRandomFromCsv();
+    }
 }

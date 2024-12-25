@@ -1,7 +1,6 @@
 package textGame;
 
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Random;
 
 public class Scene extends GameObject implements Searchable, Lootable {
@@ -63,22 +62,14 @@ public class Scene extends GameObject implements Searchable, Lootable {
             }
         }*/
     }
-    private Scene() {
-        generateFromRandomLocation();
-        addNpc(FactoryManager.generateRandomNpc());
-        addRandomLoot();
+    Scene() {
         counter++;
     }
-    Scene(Position position) {
-        this();
-        this.position = new Position(position);
-        Scene.sceneHashtable.put(this.position, this);
-    }
-    /// Constructor for entering a scene from another scene
-    Scene(Scene originScene, int direction) {
-        this();
-        position = Utility.calculateNewPosition(originScene.position, direction);
-        Scene.sceneHashtable.put(position, this);
+    public static Scene newRandomScene(Position position) {
+        Scene scene = FactoryManager.generateRandomScene();
+        scene.position = new Position(position);
+        Scene.sceneHashtable.put(scene.position, scene);
+        return scene;
     }
     public String toString() {
         return this.getName();
