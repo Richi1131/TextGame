@@ -1,4 +1,4 @@
-name;description;healAmount;Uses
-bandage;Ordinary bandage;25;3
-painkillers;small package of painkillers;25;12
-blood bag;blood bag for infusions;100;1
+name,description,healAmount,Uses
+bandage,Ordinary bandage,25,3
+painkillers,small package of painkillers,25,12
+blood bag,blood bag for infusions,100,1

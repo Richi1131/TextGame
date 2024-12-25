@@ -1,6 +1,6 @@
 package textGame;
 
-public class HealingItemFactory extends ItemFactory {
+public class HealingItemFactory extends GameObjectCsvFactory {
 
     @Override
     public Item create(String[] itemInformation) {
