@@ -1,0 +1,4 @@
+package textGame
+
+class SceneFactoy {
+}
