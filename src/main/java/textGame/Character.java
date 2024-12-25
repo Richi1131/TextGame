@@ -3,13 +3,17 @@ package textGame;
 import java.util.Random;
 
 public abstract class Character extends GameObject implements Attackable, Die, Health {
-    public Scene scene;
+    private Scene scene;
     protected Body body;
     private Inventory inventory = new Inventory();
     protected boolean isAlive = true;
 
-    public abstract void setScene(Scene scene);
-
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+    public Scene getScene() {
+        return scene;
+    }
     public Inventory getInventory() {
         return inventory;
     }

@@ -3,22 +3,22 @@ package textGame;
 import java.util.Scanner;
 
 public class App {
-    public static Scene scene = Scene.newRandomScene(new Position(0, 0));
-    public static Player player = new Player(scene);
+    public static Scene originScene = Scene.newRandomScene(new Position(0, 0));
+    public static Player player = new Player(originScene);
 
     public static void main(String[] args) throws Exception {
-        scene.setPlayer(player);
+        originScene.setPlayer(player);
         player.getInventory().addItem(FactoryManager.generateRandomLoot());
         while (true) {
             playerTurn();
-            for (Npc npc : player.scene.getNpcs()) {
+            for (Npc npc : player.getScene().getNpcs()) {
                 npcTurn(npc);
             }
         }
     }
     public static void printSituation() {
-        System.out.println("Location: " + player.scene + " at " + player.scene.getPosition());
-        System.out.println("Encounter: " + Utility.characterArrayToString(player.scene.getNpcs()));
+        System.out.println("Location: " + player.getScene() + " at " + player.getScene().getPosition());
+        System.out.println("Encounter: " + Utility.characterArrayToString(player.getScene().getNpcs()));
     }
     public static void playerTurn() {
         Scanner scanner = new Scanner(System.in);
@@ -83,10 +83,10 @@ public class App {
         if (args.length == 3) {
             // TODO: bug if player inventory is full item gets removed from scene, but not added to player
             if (args[2].equals("scene")) {
-                player.loot(player.scene, args[1]);
+                player.loot(player.getScene(), args[1]);
             }
             else {
-                GameObject target = player.scene.getGameObjectByName(args[2]);
+                GameObject target = player.getScene().getGameObjectByName(args[2]);
                 if (target instanceof Lootable lootable) {
                     player.loot(lootable, args[1]);
                 }
@@ -101,10 +101,10 @@ public class App {
     private static void playerCommandSearch(String[] args) {
         if (args.length >= 2) {
             if (args[1].equals("scene")) {
-                player.scene.search();
+                player.getScene().search();
             }
             else {
-                GameObject target = player.scene.getGameObjectByName(args[1]);
+                GameObject target = player.getScene().getGameObjectByName(args[1]);
                 if (target instanceof Searchable searchable) {
                     searchable.search();
                 }
@@ -130,7 +130,7 @@ public class App {
         if (args.length == 3) {
             Item item = player.getInventory().getItemByName(args[1]);
             if (item instanceof UsableOnGameObject usableOnGameObject) {
-                GameObject target = player.scene.getGameObjectByName(args[2]);
+                GameObject target = player.getScene().getGameObjectByName(args[2]);
                 return usableOnGameObject.useOn(target);
             }
             else {
@@ -140,7 +140,7 @@ public class App {
         if (args.length == 4) {
             Item item = player.getInventory().getItemByName(args[1]);
             if (item instanceof UsableOnGameObject usableOnGameObject) {
-                GameObject target = player.scene.getGameObjectByName(args[2]);
+                GameObject target = player.getScene().getGameObjectByName(args[2]);
                 if (target instanceof  Character targetCharacter) {
                     if (targetCharacter.body.getBodyPartByName(args[3]) != null) {
                         target = targetCharacter.body.getBodyPartByName(args[3]);
@@ -167,9 +167,9 @@ public class App {
                 player.attack(player);
                 return true;
             }
-            else if (player.scene.getNpc(target) != null) {
-                System.out.println("You try to hit " + player.scene.getNpc(target) + ".");
-                player.attack(player.scene.getNpc(target));
+            else if (player.getScene().getNpc(target) != null) {
+                System.out.println("You try to hit " + player.getScene().getNpc(target) + ".");
+                player.attack(player.getScene().getNpc(target));
                 return true;
             }
             else {
@@ -180,7 +180,7 @@ public class App {
     }
 
     private static void playerCommandLook(String[] args) {
-        System.out.println("You see " + player.scene.getDescription() + ".");
+        System.out.println("You see " + player.getScene().getDescription() + ".");
     }
 
     private static void playerCommandMove(String[] args) {

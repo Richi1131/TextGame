@@ -31,12 +31,7 @@ public class Npc extends Character implements Attack, Searchable, Lootable {
         return getName();
     }
     public void takeTurn() {
-        attack(scene.getPlayer());
-    }
-
-    @Override
-    public void setScene(Scene scene) {
-        this.scene = scene;
+        attack(getScene().getPlayer());
     }
 
     @Override
