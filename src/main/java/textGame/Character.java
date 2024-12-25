@@ -4,7 +4,7 @@ import java.util.Random;
 
 public abstract class Character extends GameObject implements Attackable, Die, Health {
     public Scene scene;
-    protected HumanoidBody body;
+    protected Body body;
     private Inventory inventory = new Inventory();
     protected boolean isAlive = true;
 
@@ -18,7 +18,9 @@ public abstract class Character extends GameObject implements Attackable, Die, H
         return !isAlive;
     }
     public Character() {
-        body = new HumanoidBody(this);
+        // todo: factory for character creation
+        body = FactoryManager.generateHumanoidBody();
+        body.setCharacter(this);
     }
     @Override
     public boolean getAttacked(int damage) {

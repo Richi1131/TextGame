@@ -19,7 +19,10 @@ public class Body extends GameObject implements Die, Attackable {
     public Character getCharacter() {
         return character;
     }
-
+    public void setCharacter(Character character) {
+        this.character = character;
+    }
+    public Body(){}
     public Body (Character character) {
         this.character = character;
         setName(character + "'s_body");

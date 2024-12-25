@@ -15,4 +15,8 @@ public class FactoryManager {
         NpcFactory factory = new NpcFactory();
         return factory.createRandomFromCsv();
     }
+    public static Body generateHumanoidBody() {
+        BodyFactory factory = new HumanoidBodyFactory();
+        return factory.create();
+    }
 }
