@@ -1,7 +1,5 @@
 package textGame;
 
-import java.util.Random;
-
 public class NpcFactory extends GameObjectCsvFactory {
     @Override
     public GameObject create(String[] npcInformation) {

@@ -1,8 +1,5 @@
 package textGame;
 
-import java.util.List;
-import java.util.Random;
-
 public class Npc extends Character implements Attack, Searchable, Lootable {
     private int damage;
     private Inventory inventory = new Inventory();

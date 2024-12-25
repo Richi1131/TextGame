@@ -55,12 +55,11 @@ public class Scene extends GameObject implements Searchable, Lootable {
                 return npc;
             }
         }
+        Item item = inventory.getItemByName(name);
+        if (item != null) {
+            return item;
+        }
         return null;
-        /*for (Item item : items) {
-            if (item.getName().equals(name)) {
-                return item;
-            }
-        }*/
     }
     Scene() {
         counter++;

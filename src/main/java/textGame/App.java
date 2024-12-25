@@ -61,12 +61,24 @@ public class App {
 
     private static void playerCommandInspect(String[] args) {
         // todo: make items outside of player inventory targetable
-        if (args.length == 2) {
-
-            GameObject target = player.getInventory().getItemByName(args[1]);
+        if (args.length == 3) {
+            GameObject target = null;
+            if (args[2].equals("inventory")) {
+                target = player.getInventory().getItemByName(args[1]);
+            }
+            else if (args[2].equals("scene")) {
+                target = player.getScene().getGameObjectByName(args[1]);
+            }
             if (target instanceof Inspectable inspectable) {
                 inspectable.inspect();
             }
+            else {
+                System.out.println(target + " is not inspectable.");
+            }
+        }
+        else {
+            System.out.println("Argument has the wrong length.");
+            System.out.println("inspect <target_item> <target_container>");
         }
     }
 
@@ -75,13 +87,7 @@ public class App {
     }
 
     private static void playerCommandLoot(String[] args) {
-        if (args.length == 1) {
-            System.out.println("Argument too short");
-            System.out.println("loot <target_item> <target_container>");
-            return;
-        }
         if (args.length == 3) {
-            // TODO: bug if player inventory is full item gets removed from scene, but not added to player
             if (args[2].equals("scene")) {
                 player.loot(player.getScene(), args[1]);
             }
@@ -94,7 +100,10 @@ public class App {
                     System.out.println(target + " is not lootable.");
                 }
             }
-            return;
+        }
+        else {
+            System.out.println("Argument has the wrong length.");
+            System.out.println("loot <target_item> <target_container>");
         }
     }
 
