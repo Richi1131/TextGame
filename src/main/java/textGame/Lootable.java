@@ -1,7 +1,5 @@
 package textGame;
 
-import java.util.Random;
-
 public interface Lootable {
     public Inventory getInventory();
     default public Item loot(String name) {
