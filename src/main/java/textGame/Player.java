@@ -15,14 +15,14 @@ public class Player extends Character implements Attack, Loot {
             return;
         }
         Position targetPosition = Utility.calculateNewPosition(this.getScene().getPosition(), direction);
-        Scene targetScene = Scene.getByPosition(targetPosition);
+        Scene targetScene = Scene.Companion.getByPosition(targetPosition);
         getScene().setPlayer(null);
         if (targetScene != null) {
             setScene(targetScene);
         }
         else {
             Position newPosition = Utility.calculateNewPosition(getScene().getPosition(), direction);
-            setScene(Scene.newRandomScene(newPosition));
+            setScene(Scene.Companion.newRandomScene(newPosition));
         }
         getScene().setPlayer(this);
     }

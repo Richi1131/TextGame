@@ -3,7 +3,7 @@ package textGame;
 import java.util.Scanner;
 
 public class App {
-    public static Scene originScene = Scene.newRandomScene(new Position(0, 0));
+    public static Scene originScene = Scene.Companion.newRandomScene(new Position(0, 0));
     public static Player player = new Player(originScene);
 
     public static void main(String[] args) throws Exception {
