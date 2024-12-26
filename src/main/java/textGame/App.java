@@ -1,5 +1,7 @@
 package textGame;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Scanner;
 
 public class App {
@@ -53,10 +55,24 @@ public class App {
             playerCommandInventory(input.split(" "));
         } else if (input.startsWith("inspect")) {
             playerCommandInspect(input.split(" "));
+        } else if (input.startsWith("discard")) {
+            playerCommandDiscard(input.split(" "));
         } else {
             System.out.println("unknown input \"" + input + "\", use \"help\" for a list of commands");
         }
         return false;
+    }
+
+    private static void playerCommandDiscard(String[] args) {
+        if (args.length != 2) {
+            System.out.println("Argument has the wrong length.");
+            System.out.println("discard <target_item>");
+        }
+        Item item = player.getInventory().getItemByName(args[1]);
+        if (item != null) {
+            System.out.println("Discarded " + item + ".");
+            player.getInventory().removeItem(item);
+        }
     }
 
     private static void playerCommandInspect(String[] args) {
