@@ -126,15 +126,19 @@ public class App {
 
     private static boolean playerCommandUse(String[] args) {
         // TODO: refactor
-        // BUG: currently entries are being separated by spaces, but some names contain spaces such as 'right leg'
         if (args.length == 1 ) {
             System.out.println("Argument too short");
             System.out.println("use <item> <?target> <?subtarget>");
             return false;
         }
         if (args.length == 2) {
-            // TODO: items usable without target
-            return false;
+            Item item = player.getInventory().getItemByName(args[1]);
+            if (item instanceof Usable usable) {
+                return usable.use();
+            }
+            else {
+                System.out.println(args[1] + " is not usable on another object.");
+            }
         }
         if (args.length == 3) {
             Item item = player.getInventory().getItemByName(args[1]);
@@ -143,7 +147,7 @@ public class App {
                 return usableOnGameObject.useOn(target);
             }
             else {
-                System.out.println(args[1] + " is not usable.");
+                System.out.println(args[1] + " is not usable on another object.");
             }
         }
         if (args.length == 4) {

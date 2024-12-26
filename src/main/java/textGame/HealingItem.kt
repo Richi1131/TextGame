@@ -1,6 +1,6 @@
 package textGame
 
-class HealingItem : Item(), UsableOnGameObject, Inspectable {
+class HealingItem : Item(), UsableOnGameObject, Usable, Inspectable {
     var healAmount: Int = 0
     private var uses = 0
     fun setUses(uses: Int) {
@@ -34,5 +34,9 @@ class HealingItem : Item(), UsableOnGameObject, Inspectable {
         output += "Remaining Uses: $uses"
 
         return output
+    }
+
+    override fun use(): Boolean {
+        return useOn(App.player)
     }
 }
