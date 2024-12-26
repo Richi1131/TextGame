@@ -2,7 +2,7 @@ package textGame;
 
 public class Npc extends Character implements Attack, Searchable, Lootable {
     private int damage;
-    private Inventory inventory = new Inventory();
+    private Inventory inventory = new Inventory(3);
 
     public void setDamage(int damage) {
         this.damage = damage;

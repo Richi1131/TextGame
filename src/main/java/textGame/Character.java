@@ -5,7 +5,7 @@ import java.util.Random;
 public abstract class Character extends GameObject implements Attackable, Die, Health {
     private Scene scene;
     protected Body body;
-    private Inventory inventory = new Inventory();
+    private Inventory inventory = new Inventory(3);
     protected boolean isAlive = true;
 
     public void setScene(Scene scene) {

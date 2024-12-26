@@ -1,6 +1,8 @@
 package textGame;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Random;
 
 public class Scene extends GameObject implements Searchable, Lootable {
@@ -9,7 +11,7 @@ public class Scene extends GameObject implements Searchable, Lootable {
     private int danger;
     private int value;
     private Player player;
-    private Inventory inventory = new Inventory();
+    private Inventory inventory = new Inventory(3);
     private Position position;
     private Npc[] npcs = new Npc[0];
 
@@ -73,22 +75,6 @@ public class Scene extends GameObject implements Searchable, Lootable {
     public String toString() {
         return this.getName();
     }
-    public void generateFromLocationsCSV(int lineNumber) {
-        String locationLine = Utility.readCsvLine("src/main/resources/locations.csv", lineNumber);
-        String[] locationInformation = locationLine.split(",");
-
-        setName(locationInformation[0]);
-        setDescription(locationInformation[1]);
-        this.danger = Integer.parseInt(locationInformation[2]);
-        this.value = Integer.parseInt(locationInformation[3]);
-    }
-    public void generateFromRandomLocation() {
-        Random rand = new Random();
-        int lowerBound = 1;
-        int upperBound = Utility.readFileLength("src/main/resources/locations.csv");
-        generateFromLocationsCSV(rand.nextInt(lowerBound, upperBound));
-    }
-
     public void removeNpc(Npc npc) {
         if (npcs.length == 0) {
             return;

@@ -1,7 +1,5 @@
 package textGame;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Scanner;
 
 public class App {
@@ -58,7 +56,7 @@ public class App {
         } else if (input.startsWith("discard")) {
             playerCommandDiscard(input.split(" "));
         } else {
-            System.out.println("unknown input \"" + input + "\", use \"help\" for a list of commands");
+            System.out.println("unknown command \"" + input + "\", use \"help\" for a list of valid commands");
         }
         return false;
     }
@@ -76,7 +74,6 @@ public class App {
     }
 
     private static void playerCommandInspect(String[] args) {
-        // todo: make items outside of player inventory targetable
         if (args.length == 3) {
             GameObject target = null;
             if (args[2].equals("inventory")) {
