@@ -14,14 +14,14 @@ public class Player extends Character implements Attack, Loot {
             System.out.println("Can't exit in this direction.");
             return;
         }
-        Position targetPosition = Utility.calculateNewPosition(this.getScene().getPosition(), direction);
+        Position targetPosition = Utility.Companion.calculateNewPosition(this.getScene().getPosition(), direction);
         Scene targetScene = Scene.Companion.getByPosition(targetPosition);
         getScene().setPlayer(null);
         if (targetScene != null) {
             setScene(targetScene);
         }
         else {
-            Position newPosition = Utility.calculateNewPosition(getScene().getPosition(), direction);
+            Position newPosition = Utility.Companion.calculateNewPosition(getScene().getPosition(), direction);
             setScene(Scene.Companion.newRandomScene(newPosition));
         }
         getScene().setPlayer(this);

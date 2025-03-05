@@ -1,0 +1,20 @@
+[
+  {
+    "name": "bandage",
+    "description": "bandage description",
+    "heal_amount": 25,
+    "uses": 3
+  },
+  {
+    "name": "painkillers",
+    "description": "painkiller description",
+    "heal_amount": 25,
+    "uses": 12
+  },
+  {
+    "name": "blood bag",
+    "description": "blood bag description",
+    "heal_amount": 100,
+    "uses": 1
+  }
+]
