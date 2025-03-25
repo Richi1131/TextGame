@@ -19,7 +19,8 @@ abstract class PlayerCommand (
             PlayerCommandLoot(),
             PlayerCommandInventory(),
             PlayerCommandInspect(),
-            PlayerCommandDiscard()
+            PlayerCommandDiscard(),
+            PlayerCommandMap()
         )
     }
 }

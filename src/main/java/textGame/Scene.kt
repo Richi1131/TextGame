@@ -77,4 +77,7 @@ class Scene internal constructor() : GameObject(), Searchable, Lootable {
     override fun getInventory(): Inventory {
         return inventory
     }
+    fun getMapDepiction(): String? {
+        return "X"
+    }
 }
