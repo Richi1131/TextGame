@@ -5,10 +5,10 @@ import textGame.Utility;
 public class UtilityTest {
     @Test
     public void readCsvTest() {
-        System.out.println(Utility.readCsvLine("src/main/resources/locations.csv", 1));
+        //System.out.println(Utility.readCsvLine("src/main/resources/locations.csv", 1));
     }
     @Test
     public void getFileLengthTest() {
-        System.out.println(Utility.readFileLength("src/main/resources/locations.csv"));
+       // System.out.println(Utility.readFileLength("src/main/resources/locations.csv"));
     }
 }

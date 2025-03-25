@@ -4,10 +4,10 @@ import java.util.Random;
 
 public class FactoryManager {
     public static Item generateRandomLoot() {
-        GameObjectCsvFactory[] factories = {new HealingItemFactory()};
+        GameObjectFactory[] factories = {new HealingItemFactory()};
         Random rand = new Random();
         int typeRoll = rand.nextInt(0, factories.length);
-        GameObjectCsvFactory factory = factories[typeRoll];
+        GameObjectFactory factory = factories[typeRoll];
         // todo: roll for rarety?
         return (Item) factory.createRandomFromCsv();
     }
